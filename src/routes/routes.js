@@ -158,29 +158,46 @@ routes.get('/cursos', async (req, res) => {
     });
 
 
-//(U) UPDATE - Endpoint PUT Cursos
+//(D) UPDATE - Endpoint PUT Cursos
 routes.put('/cursos/:id', async (req, res) => {
-    const cursoId = req.params.id;
-    const data = req.body;
+    const id = req.params.id;
 
-    try {
+    const curso = await Curso.findByPk(id);
 
-        const [cursoAtualizado] = await Curso.update(
-            data,
-            { where: {id: cursoId} }
-    );
-
-    if (!cursoAtualizado) {
-        return res.status(404).json({ error: 'Curso não encontrado' });
+    if (!curso) {
+        return res.status(404).json({ message: "Curso não encontrado." });
     }
 
-    res.status(200).json({ message: 'Curso atualizado com sucesso' });
+    curso.update(req.body);
 
-    } catch (error) {
-        console.error('Erro ao atualizar o curso', error);
-        res.status(500).json({ error: 'Erro ao atualizar curso' });
-    }
+    await curso.save();
+
+    res.json(curso);
 });
+
+//(U) UPDATE - Endpoint PUT Cursos mais completo
+// routes.put('/cursos/:id', async (req, res) => {
+//     const cursoId = req.params.id;
+//     const data = req.body;
+
+//     try {
+
+//         const [cursoAtualizado] = await Curso.update(
+//             data,
+//             { where: {id: cursoId} }
+//     );
+
+//     if (!cursoAtualizado) {
+//         return res.status(404).json({ error: 'Curso não encontrado' });
+//     }
+
+//     res.status(200).json({ message: 'Curso atualizado com sucesso' });
+
+//     } catch (error) {
+//         console.error('Erro ao atualizar o curso', error);
+//         res.status(500).json({ error: 'Erro ao atualizar curso' });
+//     }
+// });
 
 //(U) UPDATE - Endpoint PUT Cursos alternativo
 
