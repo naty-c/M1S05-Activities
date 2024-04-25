@@ -1,12 +1,12 @@
-const { DataTypes } = require('sequelize')
-const { connection } = require('../database/connection')
+const { DataTypes } = require('sequelize');
+const { connection } = require('../database/connection');
 
 const Explorer = connection.define('explorers', {
     name: {
         type: DataTypes.STRING
       },
       email: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING
       },
       phone: {
         type: DataTypes.STRING
@@ -26,7 +26,7 @@ const Explorer = connection.define('explorers', {
       profile: {
         type: DataTypes.ENUM(['Turista', 'Morador', 'Guia'])
       }
-})
+});
 
-module.exports = Explorer
+module.exports = Explorer;
 

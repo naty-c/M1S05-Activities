@@ -1,5 +1,5 @@
-const { DataTypes } = require('sequelize')
-const { connection } = require('../database/connection')
+const { DataTypes } = require('sequelize');
+const { connection } = require('../database/connection');
 
 const Area = connection.define('areas', {
     name: {
@@ -29,7 +29,7 @@ const Area = connection.define('areas', {
       price: {
         type: DataTypes.STRING
       }
-})
+});
 
-module.exports = Area
+module.exports = Area;
 
